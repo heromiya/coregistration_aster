@@ -2,10 +2,10 @@
 
 export nSample=256
 export PATH=$PATH:$HOME/anaconda3/envs/arosics/bin
-export INIMG=20170703_041651_HODO1_L1B_002297_1.tif
+export INIMG=20170703.tif
 #export REFIMG_RED=../1612110337391612129023/data1.l3a.vnir2.tif 
 #export REFIMG_NIR=../1612110337391612129023/data1.l3a.vnir3n.tif
-export OUTPUT=20170703_041651_HODO1_L1B_002297_1_shifted.tif
+export OUTPUT=20170703_shifted.tif
 export WORKDIR=$(mktemp -dp /dev/shm)
 #mkdir -p $WORKDIR
 export WARPOPTS="-overwrite -co compress=deflate -of GTiff"
@@ -20,9 +20,9 @@ LLMAX=($(echo ${UR[0]} ${UR[1]} | invproj -f %.8lf +proj=utm +zone=$(echo $EPSG 
 LONCEN=$(echo "scale=8; (${LLMIN[0]} + ${LLMAX[0]}) / 2" | bc)
 LATCEN=$(echo "scale=8; (${LLMIN[1]} + ${LLMAX[1]}) / 2" | bc)
 
-OBSY=$(echo $INIMG | sed 's/.*\/\([0-9]\{4\}\)\([0-9]\{2\}\)\([0-9]\{2\}\)_.*_.*_.*_[0-9]*_1.*/\1/')
-OBSM=$(echo $INIMG | sed 's/.*\/\([0-9]\{4\}\)\([0-9]\{2\}\)\([0-9]\{2\}\)_.*_.*_.*_[0-9]*_1.*/\2/')
-OBSD=$(echo $INIMG | sed 's/.*\/\([0-9]\{4\}\)\([0-9]\{2\}\)\([0-9]\{2\}\)_.*_.*_.*_[0-9]*_1.*/\3/')
+OBSY=$(echo $INIMG | sed 's/\([0-9]\{4\}\)\([0-9]\{2\}\)\([0-9]\{2\}\).tif/\1/')
+OBSM=$(echo $INIMG | sed 's/\([0-9]\{4\}\)\([0-9]\{2\}\)\([0-9]\{2\}\).tif/\2/')
+OBSD=$(echo $INIMG | sed 's/\([0-9]\{4\}\)\([0-9]\{2\}\)\([0-9]\{2\}\).tif/\3/')
 
 i=1
 #rm -f $WORKDIR/aseter.xml && touch $WORKDIR/aster.xml
